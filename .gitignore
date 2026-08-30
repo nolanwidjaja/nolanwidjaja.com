@@ -1,3 +1,6 @@
+# local-only docs
+docs/
+
 # build output
 dist/
 
