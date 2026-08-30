@@ -1,0 +1,24 @@
+---
+import Page from '../../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { formatDate, sortByDateDesc } from '../../lib/posts';
+
+const posts = sortByDateDesc(await getCollection('blog'));
+---
+
+<Page title="Writing — Nolan Widjaja" description="Essays and notes by Nolan Widjaja.">
+  <h1 class="text-4xl font-bold sm:text-5xl">Writing</h1>
+
+  <ul class="mt-10 divide-y divide-border">
+    {
+      posts.map((post) => (
+        <li class="py-5">
+          <a href={`/blog/${post.id}`} class="text-xl">
+            {post.data.title}
+          </a>
+          <p class="mt-1 text-sm text-text-muted">{formatDate(post.data.date)}</p>
+        </li>
+      ))
+    }
+  </ul>
+</Page>

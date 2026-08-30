@@ -1,0 +1,144 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens: Warm Minimalism */
+:root {
+  --color-bg: #f9f7f4;
+  --color-text: #1c1917;
+  --color-text-muted: #78716c;
+  --color-accent: #d97706;
+  --color-accent-hover: #b45309;
+  --color-border: #e7e4e0;
+  --color-surface: #f0ede9;
+}
+
+:root.dark {
+  --color-bg: #1a1814;
+  --color-text: #f5f0eb;
+  --color-text-muted: #a8a29e;
+  --color-accent: #d97706;
+  --color-accent-hover: #f59e0b;
+  --color-border: #2c2924;
+  --color-surface: #221f1b;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: theme('fontFamily.sans');
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* 150ms fade on theme toggle, colors only */
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: theme('fontFamily.serif');
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  code,
+  pre {
+    font-family: theme('fontFamily.mono');
+  }
+}
+
+/* Break a child out of a width-constrained parent to full viewport width */
+.full-bleed {
+  width: 100vw;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Prose styling for blog post bodies */
+.prose {
+  max-width: 68ch;
+}
+
+.prose p,
+.prose ul,
+.prose ol {
+  margin-bottom: 1.25rem;
+  line-height: 1.75;
+}
+
+.prose h2 {
+  font-size: 1.875rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.prose ol {
+  list-style: decimal;
+  padding-left: 1.5rem;
+}
+
+.prose code {
+  background-color: var(--color-surface);
+  padding: 0.15em 0.35em;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.prose pre {
+  background-color: var(--color-surface);
+  padding: 1rem 1.25rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: 1.25rem;
+}

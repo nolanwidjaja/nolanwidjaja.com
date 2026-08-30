@@ -1,0 +1,80 @@
+---
+import Page from '../layouts/Page.astro';
+import { getCollection } from 'astro:content';
+import { formatDate, sortByDateDesc } from '../lib/posts';
+
+const recentPosts = sortByDateDesc(await getCollection('blog')).slice(0, 3);
+---
+
+<Page title="Nolan Widjaja">
+  <!-- Hero -->
+  <section>
+    <h1 class="text-5xl font-bold sm:text-6xl">Nolan Widjaja</h1>
+    <!-- TODO(nolan): Replace with a one-line descriptor in your own voice. -->
+    <p class="mt-4 text-lg text-text-muted">
+      Middle schooler in District 30. I build things to figure out how they work.
+    </p>
+    <div class="mt-5 flex gap-5 text-sm">
+      <a href="https://github.com/nolanwidjaja" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="mailto:nolanwidjaja@gmail.com">Email</a>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="mt-16">
+    <!-- TODO(nolan): Rewrite this section in your own words before launch. -->
+    <p class="mb-5">
+      I'm a middle school student who spends a lot of time on the things that don't show up on a
+      report card: teaching myself how to study, building small projects, and writing about what I
+      learn along the way.
+    </p>
+    <p>
+      Right now most of my energy goes into PreACT Lab, a small group I'm putting together to help
+      other eighth graders get ready for the PreACT. This site is where I keep track of that work
+      and whatever comes next.
+    </p>
+  </section>
+
+  <!-- Projects -->
+  <section class="mt-16">
+    <h2 class="text-3xl font-semibold">Projects</h2>
+    <ul class="mt-6 space-y-4">
+      <li>
+        <div class="flex items-baseline justify-between gap-4">
+          <a href="/preact-lab" class="text-lg">PreACT Lab</a>
+          <span class="shrink-0 text-sm text-text-muted">In progress</span>
+        </div>
+        <p class="mt-1 text-text-muted">
+          A small-group program helping District 30 eighth graders strengthen the grammar and
+          writing skills the PreACT tests.
+        </p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Writing -->
+  <section class="mt-16">
+    <h2 class="text-3xl font-semibold">Writing</h2>
+    <ul class="mt-6 space-y-3">
+      {
+        recentPosts.map((post) => (
+          <li class="flex items-baseline justify-between gap-4">
+            <a href={`/blog/${post.id}`} class="text-lg">
+              {post.data.title}
+            </a>
+            <span class="shrink-0 text-sm text-text-muted">{formatDate(post.data.date)}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="/blog" class="mt-6 inline-block text-sm">All posts &rarr;</a>
+  </section>
+
+  <!-- GitHub -->
+  <section class="mt-16">
+    <p class="text-text-muted">
+      My code lives on
+      <a href="https://github.com/nolanwidjaja" target="_blank" rel="noopener noreferrer">GitHub</a>.
+    </p>
+  </section>
+</Page>
